@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<properties url="file:///D:/mybatis-gen/mybatis-ibator-soa-conf.properties"/>
+	<classPathEntry location="${mysql.jar.path}" />
+	<context id="context1" targetRuntime="MyBatis3">
+		
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		
+		<jdbcConnection driverClass="${jdbc_driverClassName}" connectionURL="${jdbc_url}" userId="${jdbc_username}" password="${jdbc_password}" />		
+			
+		<javaTypeResolver >
+       		 <property name="forceBigDecimals" value="false" /> 
+        </javaTypeResolver>		
+			
+		<javaModelGenerator targetPackage="com.globalegrow.mlogistics.entity" targetProject="basic-msoa-logistics">
+			<property name="rootInterface" value="java.io.Serializable"/>
+		</javaModelGenerator>
+		
+		<sqlMapGenerator targetPackage="mybatis.mapper" targetProject="basic-msoa-logistics/src/main/resources" />
+		
+		<javaClientGenerator targetPackage="com.globalegrow.mlogistics.datasource.db"
+			targetProject="basic-msoa-logistics" type="XMLMAPPER">
+			<property name="interfaceExtendSupInterface" value="com.globalegrow.mlogistics.common.base.BaseCrudMapper" />
+			<property name="enableInterfaceSupInterfaceGenericity" value="false" />
+			<property name="exclusionsMethods"
+				value="countByQuery,deleteByQuery,deleteByPrimaryKey,insert,insertSelective,selectByQuery,selectByQueryWithBLOBs,selectByPrimaryKey,selectCount,selectByPage,updateByQuery,updateByQueryWithBLOBs,updateByPrimaryKeySelective,updateByPrimaryKeyWithBLOBs" />
+		</javaClientGenerator>
+
+		<!-- <javaServiceGenerator targetPackage="com.globalegrow.logistics.service"
+			implementationPackage="com.globalegrow.logistics.service.impl"
+			targetProject="basic-soa-member"
+			interfaceExtendSupInterface="com.globalegrow.logistics.common.base.BaseCrudService"
+			enableInterfaceSupInterfaceGenericity="false"
+			extendSupClass="com.globalegrow.logistics.common.base.BaseCrudServiceImpl"
+			enableSupClassGenericity="false" /> -->
+
+		<!-- <sqlMapConfigFileAppend targetPackage="META-INF"
+			targetProject="basic-soa-member/src/main/resources"
+			confileFileName=""
+			confileFilePackagePath="com.globalegrow.member.datasource.base.db/" /> -->
+			
+		<!-- <javaDaoGenerator targetPackage="com.globalegrow.logistics.dao.dal" implementationPackage="com.globalegrow.logistics.dao.dal.impl" targetProject="basic-soa-logistics-dao" 
+		interfaceExtendSupInterface="com.globalegrow.hqyg.common.base.dal.BaseCrudDao" enableInterfaceSupInterfaceGenericity="false"
+		extendSupClass="com.globalegrow.hqyg.common.base.dal.BaseCrudDaoImpl" enableSupClassGenericity="false" /> -->
+			
+		<!-- <javaControllerGenerator targetPackage="com.globalegrow.logistics.web.controller" targetProject="basic-soa-logistics-web" 
+		extendSupClass="com.globalegrow.hqyg.common.base.web.BaseCrudController" enableSupClassGenericity="true" /> -->
+		
+		<tableSetting isSchema="true" enableCountByExample="false"
+            enableUpdateByExample="false" enableDeleteByExample="false"
+            enableSelectByExample="false" selectByExampleQueryId="false">
+            <prop name="replaceTablePrefix">
+                <list>
+                 <prefix name="" value="" />
+                </list>
+            </prop>
+            <prop name="ignoreGeneratorSchema" value="true"/>
+		</tableSetting> 
+		<!-- <table tableName="platform_logistics_info" enableCountByExample="false"
+            enableUpdateByExample="false" enableDeleteByExample="false"
+            enableSelectByExample="false" selectByExampleQueryId="false"/>   -->
+	</context>
+</generatorConfiguration>

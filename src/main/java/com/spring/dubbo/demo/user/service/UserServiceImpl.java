@@ -1,4 +1,4 @@
-package com.spring.dubbo.demo.user.provider;
+package com.spring.dubbo.demo.user.service;
 
 import com.spring.dubbo.demo.user.api.IUserService;
 

@@ -1,2 +1,1 @@
-´î½¨spring+maven+dubbo+zookeeper+mq+cantor+redisÏîÄ¿demo£¬
-²¢Ê¹ÓÃdocker+jenkinsÈİÆ÷ÔÆ×ö²¿Êğ£¬Ê¹ÓÃk8s×öÈİÆ÷±àÅÅ
+æ­å»ºspring+mavenã€dubboã€zookeeperã€gatewayã€apolloã€mysqlã€mybatisã€redisã€mqã€cantoré¡¹ç›®demoï¼Œ å¹¶ä½¿ç”¨docker+jenkinså®¹å™¨äº‘åšéƒ¨ç½²
