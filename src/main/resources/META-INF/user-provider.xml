@@ -9,7 +9,7 @@
     <!-- 提供方应用信息，用于计算依赖关系 -->
     <dubbo:application name="user-service" />
     <!-- 服务注册中心的地址，N/A表示不注册 -->
-    <dubbo:registry address="N/A" />
+    <dubbo:registry address="zookeeper://192.168.13.106:2181" />
     <!-- 用 Dubbo 协议在20880端口暴露服务 -->
     <dubbo:protocol name="dubbo" port="20880" />
     <!-- 声明需要暴露的服务接口 -->
