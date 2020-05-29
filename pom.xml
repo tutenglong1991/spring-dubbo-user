@@ -8,6 +8,15 @@
     <groupId>com.demo</groupId>
     <artifactId>user-service</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSSXXX</maven.build.timestamp.format>
+        <dev.version.type>-SNAPSHOT</dev.version.type>
+        <!-- 该配置可使maven打包时保持utf-8格式 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.dubbo/dubbo -->
         <dependency>
