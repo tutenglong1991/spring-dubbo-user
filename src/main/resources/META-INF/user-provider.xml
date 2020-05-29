@@ -9,9 +9,10 @@
     <!-- 提供方应用信息，用于计算依赖关系 -->
     <dubbo:application name="user-service" />
     <!-- 服务注册中心的地址，N/A表示不注册 -->
-    <dubbo:registry address="N/A" />
+    <dubbo:registry address="127.0.0.1:2181" check="false" subscribe="true" register="true"/>
+    <!--<dubbo:registry address="N/A"/>-->
     <!-- 用 Dubbo 协议在20880端口暴露服务 -->
-    <dubbo:protocol name="dubbo" port="20880" />
+    <!--<dubbo:protocol name="dubbo" port="20880" />-->
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.spring.dubbo.demo.user.api.IUserService" ref="userService" />
     <!-- 和本地Bean一样实现服务 -->
