@@ -1,7 +1,6 @@
 package com.spring.dubbo.demo.user;
 
 
-import org.apache.dubbo.container.Main;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;

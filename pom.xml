@@ -8,6 +8,7 @@
     <groupId>com.demo</groupId>
     <artifactId>user-service</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <properties>
         <timestamp>${maven.build.timestamp}</timestamp>
@@ -41,18 +42,21 @@
             <artifactId>curator-recipes</artifactId>
             <version>4.0.1</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-framework</artifactId>
             <version>4.0.1</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.springframework/org.springframework.context.support -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>org.springframework.context</artifactId>
-            <version>3.2.2.RELEASE</version>
+            <artifactId>spring</artifactId>
+            <version>5.2.0.RELEASE</version>
             <type>pom</type>
         </dependency>
+
         <!--<dependency>-->
             <!--<groupId>org.mybatis</groupId>-->
             <!--<artifactId>mybatis</artifactId>-->
@@ -62,51 +66,63 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.2.0</version>
         </dependency>
+
     </dependencies>
 
     <build>
-        <!--<resources>-->
-            <!--<resource>-->
-                <!--<directory>src/main/resources</directory>-->
-                <!--<filtering>true</filtering>-->
-            <!--</resource>-->
-            <!--<resource>-->
-                <!--<directory>src/main/scripts</directory>-->
-                <!--<filtering>true</filtering>-->
-            <!--</resource>-->
-        <!--</resources>-->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/scripts</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
-            <!-- 配置maven编译打包后jar包的主入口函数 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
+                <version>3.2.0</version>
                 <configuration>
+                    <excludes>
+                        <exclude>**/*.properties</exclude>
+                        <exclude>**/*.xml</exclude>
+                    </excludes>
                     <archive>
                         <manifest>
+                            <!-- 是否添加依赖的jar路径配置 -->
                             <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
+                            <!-- 依赖的jar包存放位置，和生成的jar放在同一级目录下 -->
+                            <classpathPrefix>${project.artifactId}-${project.version}/lib/</classpathPrefix>
+                            <!-- 配置maven编译打包后jar包的主入口函数 -->
                             <mainClass>com.spring.dubbo.demo.user.DubboMain</mainClass>
                         </manifest>
                     </archive>
+                    <!-- 配置maven编译打包依赖的本地jar包 -->
+                    <!--<includes>-->
+                        <!--<directory>${project.build.directory}</directory>-->
+                        <!--<include>**/*.jar</include>-->
+                    <!--</includes>-->
                 </configuration>
             </plugin>
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-compiler-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<source>1.8</source>-->
-                    <!--<target>1.8</target>-->
-                    <!--<encoding>UTF-8</encoding>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
+            <!-- 抽取第三方依赖 jar 包，到独立 lib 目录中 -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.7</version>
+                <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
-                    <encoding>UTF-8</encoding>
+                    <descriptor>src/main/assembly/assembly.xml</descriptor>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
