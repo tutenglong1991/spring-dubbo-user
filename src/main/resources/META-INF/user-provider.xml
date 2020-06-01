@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
-      xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
         http://dubbo.apache.org/schema/dubbo
-        http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+        http://dubbo.apache.org/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <!-- 提供方应用信息，用于计算依赖关系 -->
     <dubbo:application name="user-service" />
     <!-- 服务注册中心的地址，N/A表示不注册 -->
-    <dubbo:registry address="127.0.0.1:2181" check="false" subscribe="true" register="true"/>
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" check="false" subscribe="true" register="true"/>
     <!--<dubbo:registry address="N/A"/>-->
     <!-- 用 Dubbo 协议在20880端口暴露服务 -->
-    <!--<dubbo:protocol name="dubbo" port="20880" />-->
+    <dubbo:protocol name="dubbo" port="20880" />
     <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service interface="com.spring.dubbo.demo.user.api.IUserService" ref="userService" />
+    <dubbo:service interface="com.spring.dubbo.demo.user.service.api.IUserService" ref="userService" />
+
     <!-- 和本地Bean一样实现服务 -->
-    <bean id="userService" class="com.spring.dubbo.demo.user.service.UserServiceImpl" />
+    <bean id="userService" class="com.spring.dubbo.demo.user.service.impl.UserServiceImpl" />
 </beans>
