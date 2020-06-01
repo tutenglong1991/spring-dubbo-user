@@ -18,13 +18,14 @@ public class UserServiceImpl implements IUserService {
         String userId = req.getId();
         UserRespModel userRespModel = new UserRespModel();
         // 先使用造的数据代替数据库查询
-        switch (userId) {
-            case "1":
+        Integer userLongId = Integer.parseInt(userId);
+        switch (userLongId) {
+            case 1:
                 userRespModel.setId(userId);
                 userRespModel.setName("张三");
                 userRespModel.setAge(45);
                 userRespModel.setAddress("深圳宝安");
-            case "2":
+            case 2:
                 userRespModel.setId(userId);
                 userRespModel.setName("李四");
                 userRespModel.setAge(30);
