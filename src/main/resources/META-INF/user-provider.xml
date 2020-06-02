@@ -6,16 +6,21 @@
         http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
         http://dubbo.apache.org/schema/dubbo
         http://dubbo.apache.org/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 具体的实现bean  一般实际项目中 不会把bean写在dubbo配置中,例如采用注解开发时,通过扫描的方式把bean交给spring管理,这里不需要写,直接在dubbo-service引用就好-->
+    <bean id="userService" class="com.spring.dubbo.demo.user.service.impl.UserServiceImpl" />
+
     <!-- 提供方应用信息，用于计算依赖关系 -->
     <dubbo:application name="user-service" />
+
     <!-- 服务注册中心的地址，N/A表示不注册 -->
+    <!-- 使用zookeeper注册中心暴露服务地址 -->
+    <!--实际项目中使用properties文件的形式定义zookeeper的地址 -->
+    <!--dubbo:registry protocol="zookeeper" address="${zookeeper.address}"  check="false" file="dubbo.properties"-->
     <dubbo:registry address="zookeeper://127.0.0.1:2181" check="false" subscribe="true" register="true"/>
     <!--<dubbo:registry address="N/A"/>-->
     <!-- 用 Dubbo 协议在20880端口暴露服务 -->
     <dubbo:protocol name="dubbo" port="20880" />
-    <!-- 声明需要暴露的服务接口 -->
+    <!-- 声明需要暴露的服务接口 version是服务的版本号dubbo只找对应版本号的服务提供者进行调用 timeout 超时时间 超过时间过报错-->
     <dubbo:service interface="com.spring.dubbo.demo.user.service.api.IUserService" ref="userService" />
-
-    <!-- 和本地Bean一样实现服务 -->
-    <bean id="userService" class="com.spring.dubbo.demo.user.service.impl.UserServiceImpl" />
 </beans>
