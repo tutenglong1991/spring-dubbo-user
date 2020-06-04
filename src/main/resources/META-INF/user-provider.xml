@@ -7,9 +7,9 @@
         http://dubbo.apache.org/schema/dubbo
         http://dubbo.apache.org/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- 具体的实现bean  一般实际项目中 不会把bean写在dubbo配置中,例如采用注解开发时,通过扫描的方式把bean交给spring管理,这里不需要写,直接在dubbo-service引用就好-->
-    <bean id="userService" class="com.spring.dubbo.demo.user.service.impl.UserServiceImpl" />
-
+    <!-- 基于注解的bean定义（不需要提供setter方法）自动扫描 -->
+    <!--如果扫描到有@Component @Controller@Service@Repository等这些注解的类，则把这些类注册为bean-->
+    <context:component-scan base-package="com.spring.dubbo.demo.user"/>
     <!-- 提供方应用信息，用于计算依赖关系 -->
     <dubbo:application name="user-service" />
 
@@ -20,7 +20,11 @@
     <dubbo:registry address="zookeeper://127.0.0.1:2181" check="false" subscribe="true" register="true"/>
     <!--<dubbo:registry address="N/A"/>-->
     <!-- 用 Dubbo 协议在20880端口暴露服务 -->
-    <dubbo:protocol name="dubbo" port="20880" />
+    <dubbo:protocol name="dubbo" port="20881" />
     <!-- 声明需要暴露的服务接口 version是服务的版本号dubbo只找对应版本号的服务提供者进行调用 timeout 超时时间 超过时间过报错-->
+    <!--而dubbo和spring一块使用，ref引用已存在的service服务（即已存在的spring bean对象），
+    service才把已有的service服务发布成dubbo服务, ref必须和UserServiceImpl实现类中Component参数值一致即可-->
     <dubbo:service interface="com.spring.dubbo.demo.user.service.api.IUserService" ref="userService" />
+    <!-- 采用自己配置bean方式实现bean  一般实际项目中 不会把bean写在dubbo配置中,例如采用注解开发时,通过扫描的方式把bean交给spring管理,这里不需要写,直接在dubbo-service引用就好-->
+    <!--<bean id="userService" class="com.spring.dubbo.demo.user.service.impl.UserServiceImpl" />-->
 </beans>

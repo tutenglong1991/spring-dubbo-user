@@ -4,13 +4,16 @@ import com.alibaba.fastjson.JSON;
 import com.spring.dubbo.demo.user.service.api.IUserService;
 import com.spring.dubbo.demo.user.service.request.UserQueryReq;
 import com.spring.dubbo.demo.user.service.response.UserRespModel;
+import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Component;
 
 /**
  @Component
  @Service
  @Repository
  */
-//@Service
+@Service
+@Component("userService")
 public class UserServiceImpl implements IUserService {
 
     @Override
